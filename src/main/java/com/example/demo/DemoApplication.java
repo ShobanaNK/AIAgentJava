@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.service.LLMService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +18,10 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner onSuccessfulLoad() {
+	public CommandLineRunner onSuccessfulLoad(LLMService llmService) {
 		return args -> {
+			logger.info(llmService.chat("what is 3+4?"));
+			logger.info(llmService.chat("what is the capital of Bangladesh?"));
 			logger.debug("Demo Application successfully started.");
 		};
 	}
