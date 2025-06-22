@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.tools.CalculatorTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
@@ -14,6 +15,7 @@ public class LLMClientConfig {
     ChatClient chatClient(ChatModel chatModel) {
         return ChatClient
                 .builder(chatModel)
+                .defaultTools(new CalculatorTools())
                 .build();
     }
 }
