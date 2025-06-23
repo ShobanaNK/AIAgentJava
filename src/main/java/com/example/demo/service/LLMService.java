@@ -17,7 +17,10 @@ public class LLMService {
 
     public String chat(String question) {
         try {
-            return chatClient.prompt().user(question).call().content();
+            logger.info("Chat input: " + question);
+            String result = chatClient.prompt().user(question).call().content();
+            logger.info("Agent response: " + result);
+            return result;
         } catch (Exception ex) {
             logger.error("Chat error: ", ex);
             return "Error from AI: " + ex.getMessage();

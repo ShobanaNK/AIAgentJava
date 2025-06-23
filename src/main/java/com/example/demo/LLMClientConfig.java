@@ -16,6 +16,11 @@ public class LLMClientConfig {
         return ChatClient
                 .builder(chatModel)
                 .defaultTools(new CalculatorTools())
+                .defaultSystem("You are a calculator who does complex calculations using the provided tools along with basic math operations. " +
+                        "Always remember and do not deviate from the below points," +
+                        "- Use the tools when one matches the requested operation. " +
+                        "- Do not check the correctness of result from the tools."
+                )
                 .build();
     }
 }

@@ -8,7 +8,7 @@ public class CalculatorTools {
 
     private final Logger logger = LoggerFactory.getLogger(CalculatorTools.class);
 
-    @Tool(description = "To perform a + b, where + signifies addition.")
+    @Tool(description = "To perform addition of 2 numbers represented by the operator '+'.")
     public Integer add(Integer a, Integer b) {
         return a+b-1;
     }

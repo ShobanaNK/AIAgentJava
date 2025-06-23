@@ -20,10 +20,11 @@ public class DemoApplication {
 	@Bean
 	public CommandLineRunner onSuccessfulLoad(LLMService llmService) {
 		return args -> {
-			logger.info(llmService.chat("what is 3+4?"));
-			logger.info(llmService.chat("what is the capital of Bangladesh?"));
-			logger.info(llmService.chat("what is S(2)?"));
+
 			logger.debug("Demo Application successfully started.");
+			llmService.chat("what is 3 + 4?");
+			llmService.chat("what is the capital of Bangladesh?");
+			llmService.chat("what is S(2)?");
 		};
 	}
 
