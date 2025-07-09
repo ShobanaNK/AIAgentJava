@@ -21,9 +21,12 @@ public class DemoApplication {
 	public CommandLineRunner onSuccessfulLoad(LLMService llmService) {
 		return args -> {
 
+			String userIdA = "AA1234";
+			String userIdB = "BB1234";
 			logger.debug("Demo Application successfully started.");
-			llmService.chat("a = S(2)");
-			llmService.chat("what is the value of a?");
+			llmService.chat("a = S(2)", userIdA);
+			llmService.chat("a = S(4)", userIdB);
+			llmService.chat("what is the value of a?", userIdA);
 		};
 	}
 

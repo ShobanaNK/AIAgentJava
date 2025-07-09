@@ -3,6 +3,7 @@ package com.example.demo.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,11 +16,14 @@ public class LLMService {
         this.chatClient = chatClient;
     }
 
-    public String chat(String question) {
+    public String chat(String question, String userId) {
         try {
-            logger.info("Chat input: " + question);
-            String result = chatClient.prompt().user(question).call().content();
-            logger.info("Agent response: " + result);
+            logger.info(String.format("Chat input %s : %s ", userId, question));
+            String result = chatClient.prompt()
+                    .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, userId))
+                    .user(question).call().content();
+
+            logger.info(String.format("Agent response %s : %s ", userId, result));
             return result;
         } catch (Exception ex) {
             logger.error("Chat error: ", ex);
