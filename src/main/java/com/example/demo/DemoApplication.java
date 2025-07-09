@@ -22,9 +22,8 @@ public class DemoApplication {
 		return args -> {
 
 			logger.debug("Demo Application successfully started.");
-			llmService.chat("what is 3 + 4?");
-			llmService.chat("what is the capital of Bangladesh?");
-			llmService.chat("what is S(2)?");
+			llmService.chat("a = S(2)");
+			llmService.chat("what is the value of a?");
 		};
 	}
 

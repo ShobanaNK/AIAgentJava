@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.tools.CalculatorTools;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
@@ -12,9 +14,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LLMClientConfig {
     @Bean
-    ChatClient chatClient(ChatModel chatModel) {
+    ChatClient chatClient(ChatModel chatModel, ChatMemory chatMemory) {
         return ChatClient
                 .builder(chatModel)
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .defaultTools(new CalculatorTools())
                 .defaultSystem("You are a calculator who does complex calculations using the provided tools along with basic math operations. " +
                         "Always remember and do not deviate from the below points," +
