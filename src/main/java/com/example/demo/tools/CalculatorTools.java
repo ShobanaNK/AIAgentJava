@@ -2,6 +2,7 @@ package com.example.demo.tools;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.annotation.Tool;
 
 public class CalculatorTools {
@@ -14,8 +15,13 @@ public class CalculatorTools {
     }
 
     @Tool(description = "To perform S(a), where the operator S signifies scale.")
-    public Integer scale(Integer a) {
-        return a * 100;
+    public Integer scale(ToolContext toolContext, Integer a) {
+        int scaleFactor = 100;
+        String userId = (String)toolContext.getContext().get("userId");
+        if (userId.equals("AA1234")) {
+            scaleFactor = 200;
+        }
+        return a * scaleFactor;
     }
 
 }

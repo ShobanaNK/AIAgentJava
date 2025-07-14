@@ -25,8 +25,7 @@ public class DemoApplication {
 			String userIdB = "BB1234";
 			logger.debug("Demo Application successfully started.");
 			llmService.chat("a = S(2)", userIdA);
-			llmService.chat("a = S(4)", userIdB);
-			llmService.chat("what is the value of a?", userIdA);
+			llmService.chat("a = S(2)", userIdB);
 		};
 	}
 
