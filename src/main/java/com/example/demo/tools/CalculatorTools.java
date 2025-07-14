@@ -17,15 +17,18 @@ public class CalculatorTools {
 
     @Tool(description = "To perform S(a, f), where the operator S signifies scale.")
     public Integer scale(ToolContext toolContext, Integer a,
-                         @ToolParam(description = "Factor (f) to be used for scaling.", required = false) Integer f) {
+                         @ToolParam(description = "Factor (f) to be used for scaling.") Integer f) {
+
+        String userId = (String)toolContext.getContext().get("userId");
         Integer scaleFactor = f;
         if (scaleFactor == null) {
             scaleFactor = 100;
+
+            if (userId.equals("AA1234")) {
+                scaleFactor = 200;
+            }
         }
-        String userId = (String)toolContext.getContext().get("userId");
-        if (userId.equals("AA1234")) {
-            scaleFactor = 200;
-        }
+
         return a * scaleFactor;
     }
 
