@@ -8,17 +8,19 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.openai.api.OpenAiApi;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class LLMClientConfig {
     @Bean
-    ChatClient chatClient(ChatModel chatModel, ChatMemory chatMemory) {
+    ChatClient chatClient(ChatModel chatModel, ChatMemory chatMemory, ToolCallbackProvider tools) {
         return ChatClient
                 .builder(chatModel)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .defaultTools(new CalculatorTools())
+                .defaultToolCallbacks(tools)
                 .defaultSystem("You are a calculator who does complex calculations using the provided tools along with basic math operations. " +
                         "Always remember and do not deviate from the below points," +
                         "- Use the tools when one matches the requested operation. " +
